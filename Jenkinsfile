@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
-                nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: selectedApplication('2'), iqStage: 'build', jobCredentialsId: ''
+                sh 'mvn -B -DskipTests clean package'        
             }
         }
         stage('Test') {
@@ -21,6 +20,12 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                 }
             }
+        }
+        
+        stage('Nexus Lifecycle Analysis') {
+        	steps {
+        		nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: selectedApplication('2'), iqStage: 'build', jobCredentialsId: ''
+        	}
         }
         stage('Deliver') { 
             steps {
