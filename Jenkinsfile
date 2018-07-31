@@ -24,7 +24,7 @@ pipeline {
         
         stage('Nexus Lifecycle Analysis') {
         	steps {
-        		nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: 'simple_maven', iqStage: 'Test', jobCredentialsId: ''
+        		nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: 'simple_maven', iqStage: 'build', jobCredentialsId: ''
         	}
         }
         
