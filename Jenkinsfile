@@ -24,9 +24,10 @@ pipeline {
         
         stage('Nexus Lifecycle Analysis') {
         	steps {
-        		nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: selectedApplication('2'), iqStage: 'build', jobCredentialsId: ''
+        		nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: 'simple_maven', iqStage: 'Test', jobCredentialsId: ''
         	}
         }
+        
         stage('Deliver') { 
             steps {
                 sh './jenkins/scripts/deliver.sh' 
